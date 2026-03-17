@@ -1,0 +1,22 @@
+# Render Configuration for PathFinder Pro Backend
+services:
+  - type: web
+    name: pathfinder-pro-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: JSEARCH_API_KEY
+        sync: false
+      - key: SEARCHAPI_KEY
+        sync: false
+    healthCheckPath: /docs
+    numInstances: 1

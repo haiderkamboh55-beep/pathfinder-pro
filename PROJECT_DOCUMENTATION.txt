@@ -1,0 +1,278 @@
+================================================================================
+                    PATHFINDER PRO - PROJECT DOCUMENTATION
+================================================================================
+                    AI-Powered Career Guidance Platform
+================================================================================
+
+Created: December 2024
+Last Updated: December 28, 2024
+
+================================================================================
+                              PROJECT OVERVIEW
+================================================================================
+
+PathFinder Pro is an AI-powered career guidance platform that helps users 
+discover their ideal career path based on their skills, interests, personality 
+type (Holland Code), and mental health assessment scores.
+
+Key Features:
+- Career Discovery Assessment (5-step onboarding)
+- AI-powered Career Advice using Google Gemini
+- Real-time Job Search with JSearch API
+- Course Recommendations (Coursera, Udemy, LinkedIn Learning, edX)
+- GAD-7 and PHQ-9 Mental Health Assessments
+- Personalized Career Matching based on Holland Code (RIASEC)
+- AI Chat Assistant for career guidance
+- User Authentication with Supabase
+
+================================================================================
+                           TECHNOLOGY STACK
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              FRONTEND                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Framework:        React 19.2.0                                              │
+│ Build Tool:       Vite (rolldown-vite 7.2.5)                               │
+│ Language:         JavaScript (ES6+)                                         │
+│ Styling:          Vanilla CSS (Custom Design System)                        │
+│ State Management: React Hooks (useState, useEffect)                         │
+│ Routing:          React Router DOM 7.11.0                                   │
+│ HTTP Client:      Axios 1.13.2                                              │
+│ Authentication:   Supabase JS 2.89.0                                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              BACKEND                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Framework:        FastAPI (Python)                                          │
+│ Server:           Uvicorn (ASGI)                                            │
+│ Language:         Python 3.x                                                │
+│ AI Model:         Google Gemini 2.0 Flash                                   │
+│ AI Framework:     LangChain (langchain-google-genai)                        │
+│ Data Validation:  Pydantic                                                  │
+│ HTTP Client:      httpx (for external API calls)                            │
+│ Environment:      python-dotenv                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              DATABASE                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Provider:         Supabase (PostgreSQL)                                     │
+│ Authentication:   Supabase Auth                                             │
+│ Tables:                                                                     │
+│   - profiles      (user profiles)                                           │
+│   - career_assessments (onboarding data)                                    │
+│                                                                             │
+│ Features:                                                                   │
+│   - Row Level Security (RLS)                                                │
+│   - Real-time subscriptions                                                 │
+│   - Email authentication                                                    │
+│   - Password reset with PKCE                                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         EXTERNAL APIs                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 1. Google Gemini API                                                        │
+│    - Model: gemini-2.0-flash                                                │
+│    - Purpose: AI career advice, personalized assessments                    │
+│    - Provider: Google AI                                                    │
+│                                                                             │
+│ 2. OpenWebNinja JSearch API                                                 │
+│    - Endpoint: https://api.openwebninja.com/jsearch/search                  │
+│    - Purpose: Real-time job listings                                        │
+│    - Returns: Job titles, companies, locations, apply links                 │
+│                                                                             │
+│ 3. Supabase API                                                             │
+│    - Project: vqslnjuewhbqonbfpfjb                                          │
+│    - Purpose: Authentication, Database                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                           FRONTEND DEPENDENCIES
+================================================================================
+
+PRODUCTION DEPENDENCIES (package.json):
+----------------------------------------
+@supabase/supabase-js  ^2.89.0   - Supabase client for auth & database
+axios                  ^1.13.2   - HTTP client for API requests
+react                  ^19.2.0   - UI library
+react-dom              ^19.2.0   - React DOM renderer
+react-router-dom       ^7.11.0   - Client-side routing
+
+DEV DEPENDENCIES:
+-----------------
+@eslint/js             ^9.39.1   - ESLint core
+@types/react           ^19.2.5   - TypeScript types for React
+@types/react-dom       ^19.2.3   - TypeScript types for React DOM
+@vitejs/plugin-react   ^5.1.1    - Vite plugin for React
+eslint                 ^9.39.1   - JavaScript linter
+eslint-plugin-react-hooks    ^7.0.1    - ESLint hooks rules
+eslint-plugin-react-refresh  ^0.4.24   - ESLint refresh plugin
+globals                ^16.5.0   - Global variables
+vite (rolldown-vite)   ^7.2.5    - Build tool
+
+================================================================================
+                           BACKEND DEPENDENCIES
+================================================================================
+
+PYTHON PACKAGES (requirements.txt):
+-----------------------------------
+fastapi               - Modern web framework for APIs
+uvicorn               - ASGI server
+langchain-google-genai - LangChain integration for Google Gemini
+pydantic              - Data validation
+python-dotenv         - Environment variable management
+httpx                 - Async HTTP client
+requests              - Sync HTTP client (for job search)
+
+================================================================================
+                           PROJECT STRUCTURE
+================================================================================
+
+PathFinder PRo/
+│
+├── Frontend/
+│   └── frontend/
+│       ├── public/
+│       │   └── logo.png
+│       ├── src/
+│       │   ├── components/
+│       │   │   ├── Footer.jsx
+│       │   │   ├── Navbar.jsx
+│       │   │   └── ScrollToTop.jsx
+│       │   ├── pages/
+│       │   │   ├── AssessmentsPage.jsx
+│       │   │   ├── FeaturesPage.jsx
+│       │   │   ├── LoginPage.jsx
+│       │   │   ├── OnboardingPage.jsx
+│       │   │   ├── ResetPasswordPage.jsx
+│       │   │   ├── ServicesPage.jsx
+│       │   │   └── SignUpPage.jsx
+│       │   ├── App.jsx           (Main app with routes)
+│       │   ├── main.jsx          (Entry point)
+│       │   ├── styles.css        (Global styles - 95KB)
+│       │   └── supabaseClient.js (Supabase config)
+│       ├── .env
+│       ├── package.json
+│       ├── vite.config.js
+│       └── index.html
+│
+├── backend/
+│   ├── app/
+│   │   ├── api.py       (API routes)
+│   │   ├── bot.py       (Gemini AI logic - 27KB)
+│   │   └── models.py    (Pydantic models)
+│   ├── .env
+│   ├── main.py          (FastAPI app entry)
+│   └── requirements.txt
+│
+└── PROJECT_DOCUMENTATION.txt (this file)
+
+================================================================================
+                           API ENDPOINTS
+================================================================================
+
+Backend runs on: http://localhost:8000
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ ENDPOINT                    │ METHOD │ DESCRIPTION                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ /api/job-suggestions        │ POST   │ Get AI career recommendations        │
+│ /api/chat                   │ POST   │ Chat with AI assistant               │
+│ /api/generate-assessments   │ POST   │ Generate personalized GAD/PHQ        │
+│ /api/career-advice          │ POST   │ Comprehensive career guidance        │
+│ /api/search-jobs            │ POST   │ Search real jobs (JSearch API)       │
+│ /api/check-email            │ POST   │ Verify if email exists               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                        ENVIRONMENT VARIABLES
+================================================================================
+
+FRONTEND (.env):
+----------------
+VITE_SUPABASE_URL=https://vqslnjuewhbqonbfpfjb.supabase.co
+VITE_SUPABASE_ANON_KEY=<supabase-anon-key>
+
+BACKEND (.env):
+---------------
+GOOGLE_API_KEY=<google-gemini-api-key>
+SUPABASE_URL=https://vqslnjuewhbqonbfpfjb.supabase.co
+SUPABASE_KEY=<supabase-service-key>
+JOB_SEARCH_API_KEY=<openwebninja-jsearch-key>  (currently hardcoded in bot.py)
+
+================================================================================
+                           HOW TO RUN
+================================================================================
+
+FRONTEND:
+---------
+cd Frontend/frontend
+npm install
+npm run dev
+# Runs on http://localhost:5173
+
+BACKEND:
+--------
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+# Runs on http://localhost:8000
+
+================================================================================
+                           FEATURES BREAKDOWN
+================================================================================
+
+1. CAREER DISCOVERY (5-Step Onboarding)
+   - Step 1: Basic Info (name, education, target role, skills)
+   - Step 2: Interests (Holland Code - RIASEC personality)
+   - Step 3: GAD-7 Anxiety Assessment (AI-personalized)
+   - Step 4: PHQ-9 Mood Assessment (AI-personalized)
+   - Step 5: AI Career Advice with:
+     * Career Matches
+     * Course Recommendations
+     * Job Search Links
+     * Work Environment Tips
+     * Action Steps
+
+2. AI ASSISTANT
+   - Real-time chat with career coach
+   - Job search by keywords/location
+   - Course recommendations
+   - Career guidance
+
+3. AUTHENTICATION
+   - Email/Password signup
+   - Login
+   - Password reset (PKCE flow)
+   - Session management
+
+4. JOB SEARCH
+   - Real-time job listings from JSearch API
+   - Filter by role, location
+   - Direct apply links
+
+5. COURSE RECOMMENDATIONS
+   - Coursera links
+   - Udemy links
+   - LinkedIn Learning links
+   - edX links
+
+
+
+================================================================================
+                              CREDITS
+================================================================================
+
+Developed with:
+- Google Gemini AI
+- Supabase
+- React
+- FastAPI
+- OpenWebNinja JSearch API
+
+================================================================================
+                          END OF DOCUMENTATION
+================================================================================
